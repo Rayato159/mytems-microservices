@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  users-http:
+    build:
+      context: .
+      dockerfile: "Dockerfile.Users.Http"
+    ports:
+      - 3000:3000
+    volumes:
+      - /.env.users.http:/bin/.env.users.http
+  users-grpc:
+    build:
+      context: .
+      dockerfile: "Dockerfile.Users.Grpc"
+    ports:
+      - 3100:3100
+    volumes:
+      - /.env.users.grpc:/bin/.env.users.grpc
+  items-http:
+    build:
+      context: .
+      dockerfile: "Dockerfile.Items.Http"
+    ports:
+      - 3200:3200
+    volumes:
+      - /.env.items.http:/bin/.env.items.http
+  items-grpc:
+    build:
+      context: .
+      dockerfile: "Dockerfile.Items.Grpc"
+    ports:
+      - 3300:3300
+    volumes:
+      - /.env.items.grpc:/bin/.env.items.grpc

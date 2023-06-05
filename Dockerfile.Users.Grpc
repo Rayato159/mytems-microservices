@@ -1,0 +1,19 @@
+FROM golang:1.20-buster AS build
+
+WORKDIR /app
+
+COPY . ./
+RUN go mod download
+
+RUN CGO_ENABLED=0 go build -o /bin/app /app/apps/usersGrpc/main.go
+
+## Deploy
+FROM debian:buster-slim
+RUN apt-get update && apt-get install -y ca-certificates
+
+COPY --from=build /bin/app /bin
+COPY .env.users.grpc /bin
+
+EXPOSE 9999
+
+CMD [ "/bin/app", "/bin/.env.users.grpc" ]
