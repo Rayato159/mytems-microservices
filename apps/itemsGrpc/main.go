@@ -20,7 +20,5 @@ func main() {
 	client := database.DBConnect(cfg)
 	defer database.DBDisconnect(client)
 
-	db := client.Database(cfg.Db().Database())
-
-	server.NewGrpcServer(cfg, db).RunItemsGrpc()
+	server.NewGrpcServer(cfg, client).RunItemsGrpc()
 }

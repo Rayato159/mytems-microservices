@@ -17,10 +17,10 @@ type IServerHttp interface {
 type httpServer struct {
 	app *fiber.App
 	cfg config.IConfig
-	db  *mongo.Database
+	db  *mongo.Client
 }
 
-func NewHttpServer(cfg config.IConfig, db *mongo.Database) IServerHttp {
+func NewHttpServer(cfg config.IConfig, db *mongo.Client) IServerHttp {
 	return &httpServer{
 		cfg: cfg,
 		db:  db,

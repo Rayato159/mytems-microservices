@@ -15,10 +15,10 @@ type IServerGrpc interface {
 type grpcServer struct {
 	server *grpc.Server
 	cfg    config.IConfig
-	db     *mongo.Database
+	db     *mongo.Client
 }
 
-func NewGrpcServer(cfg config.IConfig, db *mongo.Database) IServerGrpc {
+func NewGrpcServer(cfg config.IConfig, db *mongo.Client) IServerGrpc {
 	var opts []grpc.ServerOption
 	server := grpc.NewServer(opts...)
 
